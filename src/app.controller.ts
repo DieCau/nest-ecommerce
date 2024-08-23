@@ -30,6 +30,11 @@ export class AppController {
     return `products: limit => ${limit} offset => ${offset} brand => ${brand}`;
   }
 
+  @Get('products/filter')
+  getProductFilter() {
+    return `yo soy un filter`;
+  }
+
   @Get('products/:productId')
   getProduct(@Param('productId') productId: string) {
     return `product: ${productId}`;
