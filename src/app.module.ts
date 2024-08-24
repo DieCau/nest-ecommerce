@@ -9,13 +9,14 @@ import { ProductsModule } from './products/products.module';
 import { BrandsModule } from './brands/brands.module';
 
 @Module({
-  imports: [BrandsModule,
-ProductsModule,
-CategoriesModule,
-CustomersModule,
-UsersModule,
-OrdersModule,
-],
+  imports: [
+    BrandsModule,
+    ProductsModule,
+    CategoriesModule,
+    CustomersModule,
+    UsersModule,
+    OrdersModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
