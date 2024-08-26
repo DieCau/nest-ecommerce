@@ -1,4 +1,18 @@
-import { Controller, Get, Query, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  HttpCode,
+  HttpStatus,
+  Res,
+} from '@nestjs/common';
+
+import { Response } from 'express';
 
 @Controller('products')
 export class ProductsController {
@@ -9,16 +23,46 @@ export class ProductsController {
     @Query('offset') offset = 0,
     @Query('brand') brand: string
   ) {
-    return `products: limit => ${limit} offset => ${offset} brand => ${brand}`;
+    return {
+      message: `products: limit => ${limit} offset => ${offset} brand => ${brand}`,
+    };
   }
 
   @Get('filter')
   getProductFilter() {
-    return `yo soy un filter`;
+    return {
+      message: `yo soy un filter`,
+    };
   }
 
-  @Get(':productId')
-  getProduct(@Param('productId') productId: string) {
-    return `product: ${productId}`;
+  @Get(':id')
+  @HttpCode(HttpStatus.ACCEPTED)
+  getOne(@Res() response: Response, @Param('id') id: number) {
+    response.status(200).send({
+      message: `product ${id}`,
+    });
+  }
+
+  @Post()
+  create(@Body() payload: any) {
+    return {
+      message: 'product created',
+      payload,
+    };
+  }
+  @Put(':id')
+  update(@Param('id') id: number, @Body() payload: any) {
+    return {
+      id,
+      payload,
+      message: 'modified product',
+    };
+  }
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return {
+      id,
+      message: 'product removed',
+    };
   }
 }
