@@ -9,13 +9,16 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-  Res,
 } from '@nestjs/common';
 
-import { Response } from 'express';
+import { ParseIntPipe } from '@nestjs/common';
+
+import { ProductsService } from '../services/products.service';
 
 @Controller('products')
 export class ProductsController {
+  constructor(private productsService: ProductsService) {}
+
   // Querys
   @Get()
   getProducts(
@@ -23,9 +26,10 @@ export class ProductsController {
     @Query('offset') offset = 0,
     @Query('brand') brand: string
   ) {
-    return {
-      message: `products: limit => ${limit} offset => ${offset} brand => ${brand}`,
-    };
+    // return {
+    //   message: `products: limit => ${limit} offset => ${offset} brand => ${brand}`,
+    // };
+    return this.productsService.findAll();
   }
 
   @Get('filter')
@@ -37,32 +41,29 @@ export class ProductsController {
 
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Res() response: Response, @Param('id') id: number) {
-    response.status(200).send({
-      message: `product ${id}`,
-    });
+  getOne(@Param('id', ParseIntPipe) id: number) {
+    // response.status(200).send({
+    //   message: `product ${id}`,
+    // });
+    return this.productsService.findOne(id);
   }
 
   @Post()
   create(@Body() payload: any) {
-    return {
-      message: 'product created',
-      payload,
-    };
+    // return {
+    //   message: 'product created',
+    //   payload,
+    // };
+    return this.productsService.create(payload);
   }
+
   @Put(':id')
-  update(@Param('id') id: number, @Body() payload: any) {
-    return {
-      id,
-      payload,
-      message: 'modified product',
-    };
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: any) {
+    return this.productsService.update(id, payload);
   }
+
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return {
-      id,
-      message: 'product removed',
-    };
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.remove(id);
   }
 }
