@@ -23,9 +23,9 @@ export class ProductsController {
   // Querys
   @Get()
   getProducts(
-    @Query('limit') _limit = 100,
-    @Query('offset') _offset = 0,
-    @Query('brand') _brand: string
+    @Query('limit') limit = 100,
+    @Query('offset') offset = 0,
+    @Query('brand') brand: string
   ) {
     // return {
     //   message: `products: limit => ${limit} offset => ${offset} brand => ${brand}`,
