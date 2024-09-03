@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { BrandsService } from './brand/services/brands.service';
-import { CategoriesService } from './category/services/categories.service';
-import { CustomersService } from './customer/services/customers.service';
-import { OrdersService } from './order/services/orders.service';
-import { ProductsService } from './product/services/products.service';
-import { UsersService } from './user/services/users.service';
-import { BrandsModule } from './brand/controllers/brands.module';
-import { ProductsModule } from './product/controllers/products.module';
-import { CategoriesModule } from './category/controllers/categories.module';
-import { CustomersModule } from './customer/controllers/customers.module';
-import { UsersModule } from './user/controllers/users.module';
-import { OrdersModule } from './order/controllers/orders.module';
+import { BrandsService } from './brands/services/brands.service';
+import { CategoriesService } from './categories/services/categories.service';
+import { CustomersService } from './customers/services/customers.service';
+import { OrdersService } from './orders/services/orders.service';
+import { ProductsService } from './products/services/products.service';
+import { UsersService } from './users/services/users.service';
+import { BrandsModule } from './brands/controllers/brands.module';
+import { ProductsModule } from './products/controllers/products.module';
+import { CategoriesModule } from './categories/controllers/categories.module';
+import { CustomersModule } from './customers/controllers/customers.module';
+import { UsersModule } from './users/controllers/users.module';
+import { OrdersModule } from './orders/controllers/orders.module';
 
 @Module({
   imports: [
