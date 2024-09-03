@@ -9,9 +9,11 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-  ParseIntPipe,
+  // ParseIntPipe,
 } from '@nestjs/common';
 
+import { ParseIntPipe } from '../../common/parse-int.pipe';
+import { CreateProductDto, UpdateProductDto } from '../../dtos/products.dtos';
 import { ProductsService } from '../services/products.service';
 
 @Controller('products')
@@ -21,9 +23,9 @@ export class ProductsController {
   // Querys
   @Get()
   getProducts(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-    @Query('brand') brand: string
+    @Query('limit') _limit = 100,
+    @Query('offset') _offset = 0,
+    @Query('brand') _brand: string
   ) {
     // return {
     //   message: `products: limit => ${limit} offset => ${offset} brand => ${brand}`,
@@ -48,7 +50,7 @@ export class ProductsController {
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: CreateProductDto) {
     // return {
     //   message: 'product created',
     //   payload,
@@ -57,7 +59,10 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() payload: any) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateProductDto
+  ) {
     return this.productsService.update(id, payload);
   }
 
