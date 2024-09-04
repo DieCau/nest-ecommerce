@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
 
-@Controller('rest/users')
+@Controller('users')
 export class UsersController {
   @Post()
   create(@Body() payload: any) {

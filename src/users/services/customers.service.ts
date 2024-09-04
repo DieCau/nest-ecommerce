@@ -9,9 +9,9 @@ export class CustomersService {
   private customers: Customer[] = [
     {
       id: 1,
-      name: 'Nicolas',
-      lastName: 'Molina',
-      phone: '3111111212',
+      name: 'Diego',
+      lastName: 'Caucota',
+      phone: '27562040',
     },
   ];
 
