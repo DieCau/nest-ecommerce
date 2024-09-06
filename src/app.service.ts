@@ -7,7 +7,6 @@ export class AppService {
     @Inject('TASKS') private tasks: any[]
   ) {}
   getHello(): string {
-    console.log(this.tasks);
     return `Tu Api_Key tiene el valor: ${this.apikey}`;
   }
 }
