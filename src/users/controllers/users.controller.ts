@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 
 import { ParseIntPipe } from './../../common/parse-int.pipe';
+import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
 import { UsersService } from './../services/users.service';
 
 @Controller('users')
@@ -30,25 +31,17 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() payload: any) {
-    return {
-      message: 'user created',
-      payload,
-    };
+  create(@Body() payload: CreateUserDto) {
+    return this.usersService.create(payload);
   }
+
   @Put(':id')
-  update(@Param('id') id: number, @Body() payload: any) {
-    return {
-      id,
-      payload,
-      message: 'modified user',
-    };
+  update(@Param('id') id: number, @Body() payload: UpdateUserDto) {
+    return this.usersService.update(id, payload);
   }
+
   @Delete(':id')
   delete(@Param('id') id: number) {
-    return {
-      id,
-      message: 'user removed',
-    };
+    return this.usersService.remove(id);
   }
 }

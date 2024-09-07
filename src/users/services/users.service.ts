@@ -38,22 +38,22 @@ export class UsersService {
     return user;
   }
 
-  create(data: CreateUserDto) {
-    this.counterId = this.counterId + 1;
+  create(payload: CreateUserDto) {
+    this.counterId++;
     const newUser = {
       id: this.counterId,
-      ...data,
+      ...payload,
     };
     this.users.push(newUser);
     return newUser;
   }
 
-  update(id: number, changes: UpdateUserDto) {
+  update(id: number, payload: UpdateUserDto) {
     const user = this.findOne(id);
     const index = this.users.findIndex((item) => item.id === id);
     this.users[index] = {
       ...user,
-      ...changes,
+      ...payload,
     };
     return this.users[index];
   }
